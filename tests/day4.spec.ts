@@ -79,12 +79,12 @@ test('Verify elements using data-testid', async({ page }) => {
 test('Count all elements with test ids', async({ page }) => {
 
     const countTestId = page.getByRole('listitem')
-    .filter({has : })
+    .filter({})
 
     console.log(await countTestId.count())
    // await expect(inStock).toHaveCount(3)
 }
-) 
+)
 
 //Find "Say goodbye" button for John
 test('Find "Say goodbye" button for John', async({ page }) => {
@@ -95,6 +95,62 @@ test('Find "Say goodbye" button for John', async({ page }) => {
 
     await expect(sayGoodBye).toBeVisible();
     await expect(sayGoodBye).toContainText('Say goodbye')
+
+   // await expect(inStock).toHaveCount(3)
+}
+) 
+
+//Find "Say hello" button for Mary
+test('Find "Say hello" button for Mary', async({ page }) => {
+
+    const sayGoodBye = page.getByRole('listitem')
+    .filter({hasText : 'Mary'})
+    .getByRole('button', {name : 'Say hello'})
+
+    await expect(sayGoodBye).toBeVisible();
+    await expect(sayGoodBye).toContainText('Say hello')
+
+   // await expect(inStock).toHaveCount(3)
+}
+) 
+
+//Count "Say hello" buttons for John
+test('Count "Say hello" buttons for John', async({ page }) => {
+
+    const sayGoodBye = page.getByRole('listitem')
+    .filter({hasText : 'John'})
+    .getByRole('button', {name : 'Say hello'})
+
+    await expect(sayGoodBye).toBeVisible();
+    console.log(await sayGoodBye.count())
+
+   // await expect(inStock).toHaveCount(3)
+}
+) 
+
+// Count "Say goodbye" buttons for Mary
+test('Count "Say goodbye" buttons for Mary', async({ page }) => {
+
+    const sayGoodBye = page.getByRole('listitem')
+    .filter({hasText : 'Mary'})
+    .getByRole('button', {name : 'Say goodbye'})
+
+    await expect(sayGoodBye).toBeVisible();
+    console.log(await sayGoodBye.count())
+
+   // await expect(inStock).toHaveCount(3)
+}
+) 
+
+//Count all buttons for John
+
+test('Count all buttons for John', async({ page }) => {
+
+    const sayGoodBye = page.getByRole('listitem')
+    .filter({hasText : 'John'})
+
+   // await expect(sayGoodBye).toBeVisible();
+    console.log(await sayGoodBye.count())
 
    // await expect(inStock).toHaveCount(3)
 }

@@ -90,7 +90,33 @@ test('Submit Button Validation ', async({page})=>{
    await submitButton.click()
    await expect(submitButton).toBeEnabled()
 
+})
 
+//Additional (Recommended) Test Cases 
+test.only('Additional (Recommended) Test Cases', async({page})=>{
+
+   //Leave all fields empty and click Submit
+   const submitButton = page.getByRole('button', {name: 'Submit'}).first()
+   await submitButton.click()
+   
+   const errorMessage = page.getByText('Please fix the following:').first()
+   await expect(errorMessage).toHaveText('Please fix the following:')
+
+   //Enter invalid email format 
+   await page.getByLabel('Email').fill('s.com')
+   await submitButton.click()
+   const emailError = page.getByText('Please enter a valid email address.').first()
+   await expect(emailError).toHaveText('Please enter a valid email address.')
+
+   //Enter alphabets in phone field 
+   const phoneInput = page.getByLabel('Phone')
+   await phoneInput.fill('soham')
+   await expect(phoneInput).toHaveValue('')
+   
+   //Enter more than 15 chars in name
+   const nameInput = page.getByLabel('Full name')
+   nameInput.fill('sohamsohamsohamsoham')
+   await expect(nameInput).toHaveValue('sohamsohamsoham')
 
 
 })

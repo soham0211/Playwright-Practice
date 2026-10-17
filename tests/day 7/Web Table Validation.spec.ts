@@ -93,6 +93,59 @@ test.describe('Drop down validation', () => {
 
             }
         }
+
+        //Calculate total price of all products → Expected: 999 + 29 + 79 + 349 = 1456 
+        let totalPrice = 0
+        for (let j = 0; j < tableData.length; j++) {
+            let productPrice = tableData[j][2]
+            totalPrice = totalPrice + parseInt(productPrice.replace('$', ''))
+        }
+        console.log(totalPrice)
+        expect(totalPrice).toBe(1456)
+
+        // Find product with highest price → Expected: Laptop ($999)
+
+        let highestPrice
+        for (let k = 1; k < tableData.length; k++) {
+
+            
+            let comparePrice
+
+            highestPrice = parseInt(tableData[0][2].replace('$', ''))
+            comparePrice = parseInt(tableData[k][2].replace('$', ''))
+            if (highestPrice < comparePrice) {
+
+                highestPrice = comparePrice
+            }
+
+        }
+        console.log(highestPrice)
+
+
+        // Find product with lowest price → Expected: Mouse ($29)
+        let lowestPrice = parseInt(tableData[0][2].replace('$', ''))
+        for (let k = 1; k < tableData.length; k++) {
+
+            let comparePrice
+            comparePrice = parseInt(tableData[k][2].replace('$', ''))
+            if (lowestPrice > comparePrice) {
+
+                lowestPrice = comparePrice
+            }
+
+        }
+        console.log(lowestPrice)
+
+        //Print products with price greater than $100 → Expected: Laptop, Monitor
+
+        for (let j = 0; j < tableData.length; j++) {
+            let productPrice = parseInt(tableData[j][2].replace('$', ''))
+            if(productPrice > 100){
+                console.log("Product Name = ", tableData[j][0])
+            }
+            
+        }
+
     })
 
 })
